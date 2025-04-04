@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability Word Challenge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="word_game.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Moved the return button inside the start-screen div -->
+        <div id="start-screen" class="screen">
+            <a href="/" class="return-btn">← Return to Chatbot</a>
+            
+            <div class="eco-icon">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <h1>Sustainability Word Challenge</h1>
+            <p>Test your knowledge of sustainability terms with two exciting game modes!</p>
+            
+            <div class="game-mode-selection">
+                <div class="game-mode" id="hangman-mode">
+                    <h3>Hangman</h3>
+                    <i class="fas fa-tree"></i>
+                    <p>Guess the word letter by letter before you run out of attempts.</p>
+                </div>
+                <div class="game-mode" id="scramble-mode">
+                    <h3>Word Scramble</h3>
+                    <i class="fas fa-random"></i>
+                    <p>Unscramble the letters to form sustainability-related words.</p>
+                </div>
+            </div>
+            
+            <div class="game-options">
+                <div class="option">
+                    <label for="difficulty">Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="option">
+                    <label for="time-mode">Game Mode:</label>
+                    <select id="time-mode">
+                        <option value="timed">Timed (60 seconds)</option>
+                        <option value="unlimited">Unlimited</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="start-btn" class="btn">Start Game</button>
+        </div>
+
+        <div id="loading-screen" class="screen hidden">
+            <div class="loading-animation">
+                <div class="earth">
+                    <div class="orbit">
+                        <div class="satellite"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Loading sustainability words...</p>
+        </div>
+
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="score-container">
+                    <i class="fas fa-star"></i>
+                    <span id="score">0</span> Points
+                </div>
+                <div id="timer-container" class="timer-container">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">60</span>s
+                </div>
+                <div class="word-counter">
+                    Word <span id="current-word">1</span>/<span id="total-words">10</span>
+                </div>
+            </div>
+
+            <!-- Hangman Game Area -->
+            <div id="hangman-area" class="game-area">
+                <div class="hangman-container">
+                    <div id="hangman-drawing" class="hangman-drawing">
+                        <!-- Hangman SVG will be inserted here -->
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+                            <!-- Base -->
+                            <line id="base" x1="40" y1="180" x2="160" y2="180" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Pole -->
+                            <line id="pole" x1="60" y1="20" x2="60" y2="180" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Top -->
+                            <line id="top" x1="60" y1="20" x2="120" y2="20" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Rope -->
+                            <line id="rope" x1="120" y1="20" x2="120" y2="40" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Head -->
+                            <circle id="head" cx="120" cy="55" r="15" stroke-width="4" stroke="#333" fill="none" class="hidden" />
+                            <!-- Body -->
+                            <line id="body" x1="120" y1="70" x2="120" y2="120" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Left Arm -->
+                            <line id="left-arm" x1="120" y1="80" x2="100" y2="100" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Right Arm -->
+                            <line id="right-arm" x1="120" y1="80" x2="140" y2="100" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Left Leg -->
+                            <line id="left-leg" x1="120" y1="120" x2="100" y2="150" stroke-width="4" stroke="#333" class="hidden" />
+                            <!-- Right Leg -->
+                            <line id="right-leg" x1="120" y1="120" x2="140" y2="150" stroke-width="4" stroke="#333" class="hidden" />
+                        </svg>
+                    </div>
+                    <div id="word-display" class="word-display"></div>
+                </div>
+                <div id="keyboard" class="keyboard"></div>
+                <div id="hint-container" class="hint-container">
+                    <button id="hint-btn" class="hint-btn">Get Hint</button>
+                    <p id="hint-text" class="hint-text hidden"></p>
+                </div>
+            </div>
+
+            <!-- Word Scramble Game Area -->
+            <div id="scramble-area" class="game-area hidden">
+                <div class="scramble-container">
+                    <div id="scrambled-word" class="scrambled-word"></div>
+                    <div id="scramble-input-area" class="scramble-input-area">
+                        <input type="text" id="scramble-input" placeholder="Type your answer..." autocomplete="off">
+                        <button id="submit-btn" class="submit-btn">Submit</button>
+                    </div>
+                </div>
+                <div id="scramble-hint-container" class="hint-container">
+                    <button id="scramble-hint-btn" class="hint-btn">Get Hint</button>
+                    <p id="scramble-hint-text" class="hint-text hidden"></p>
+                </div>
+            </div>
+
+            <div class="game-footer">
+                <button id="skip-btn" class="icon-btn" title="Skip this word">
+                    <i class="fas fa-forward"></i> Skip
+                </button>
+                <button id="restart-game-btn" class="icon-btn" title="Restart game">
+                    <i class="fas fa-redo"></i> Restart
+                </button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen hidden">
+            <h2>Game Complete!</h2>
+            <div class="final-score">
+                <i class="fas fa-star"></i>
+                <span id="final-score">0</span> Points
+            </div>
+            <div id="performance-message" class="performance-message"></div>
+            <div id="word-summary" class="word-summary"></div>
+            <div class="ending-buttons">
+                <button id="play-again-btn" class="btn">Play Again</button>
+                <button id="share-result-btn" class="btn">Share Results</button>
+            </div>
+        </div>
+
+        <div id="hint-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Word Hint</h3>
+                <p id="modal-hint-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="word_game.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability Quiz Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="quiz_game.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <!-- Add this button at the top of your container div -->
+    <div class="container">
+        <a href="/" class="return-btn">← Return to Chatbot</a>
+        
+        <div id="start-screen" class="screen">
+            <div class="eco-icon">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <h1>Sustainability Quiz</h1>
+            <p>Test your knowledge about environmental sustainability with 10 questions!</p>
+            <button id="start-btn" class="btn">Start Quiz</button>
+        </div>
+
+        <div id="loading-screen" class="screen hidden">
+            <div class="loading-animation">
+                <div class="earth">
+                    <div class="orbit">
+                        <div class="satellite"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Loading questions...</p>
+        </div>
+
+        <div id="quiz-screen" class="screen hidden">
+            <div class="quiz-header">
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                <div class="score-container">
+                    <i class="fas fa-star"></i>
+                    <span id="score">0</span>
+                </div>
+                <div class="question-counter">
+                    Question <span id="current-question">1</span>/<span id="total-questions">10</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text">Question text will appear here</h2>
+                <div class="options-container" id="options-container">
+                    <!-- Options will be added here dynamically -->
+                </div>
+            </div>
+
+            <div id="feedback-container" class="feedback-container hidden">
+                <div id="feedback-icon" class="feedback-icon"></div>
+                <p id="feedback-text"></p>
+                <button id="next-btn" class="btn">Next Question</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen hidden">
+            <div class="results-header">
+                <h2>Quiz Completed!</h2>
+                <div class="final-score">
+                    <span id="final-score">0</span>/100
+                </div>
+            </div>
+            <p id="performance-message">Performance message will appear here</p>
+            <div class="results-icons">
+                <i class="fas fa-recycle"></i>
+                <i class="fas fa-solar-panel"></i>
+                <i class="fas fa-seedling"></i>
+            </div>
+            <button id="restart-btn" class="btn">Play Again</button>
+        </div>
+    </div>
+
+    <div id="confetti-container"></div>
+    
+    <audio id="correct-sound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
+    <audio id="incorrect-sound" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" preload="auto"></audio>
+    <audio id="background-music" src="https://assets.mixkit.co/active_storage/sfx/2434/2434-preview.mp3" loop preload="auto"></audio>
+
+    <script src="quiz_game.js"></script>
+</body>
+</html>

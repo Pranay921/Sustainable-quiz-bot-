@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Adventure Story Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="eco_adventure.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="return-btn">← Return to Chatbot</a>
+        
+        <div id="start-screen" class="screen">
+            <div class="eco-icon">
+                <i class="fas fa-tree"></i>
+            </div>
+            <h1>Eco-Adventure</h1>
+            <p>Embark on an adventure where your choices shape the environment. Make decisions that protect our planet and discover the consequences of your actions.</p>
+            <button id="start-btn" class="btn">Begin Adventure</button>
+        </div>
+
+        <div id="loading-screen" class="screen hidden">
+            <div class="loading-animation">
+                <div class="earth">
+                    <div class="orbit">
+                        <div class="satellite"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Loading your adventure...</p>
+        </div>
+
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="eco-score">
+                    <i class="fas fa-leaf"></i>
+                    <span id="eco-points">0</span> Eco-Points
+                </div>
+                <div class="chapter-indicator">
+                    Chapter <span id="current-chapter">1</span>/10
+                </div>
+            </div>
+
+            <div class="story-container">
+                <div id="story-text" class="story-text"></div>
+                <div id="story-image" class="story-image"></div>
+                <div id="choices-container" class="choices-container">
+                    <!-- Choices will be added here dynamically -->
+                </div>
+            </div>
+
+            <div class="game-footer">
+                <button id="hint-btn" class="icon-btn" title="Get a hint">
+                    <i class="fas fa-lightbulb"></i>
+                </button>
+                <button id="restart-btn" class="icon-btn" title="Restart game">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="ending-screen" class="screen hidden">
+            <h2>Adventure Complete</h2>
+            <div class="final-score">
+                <i class="fas fa-leaf"></i>
+                <span id="final-eco-points">0</span> Eco-Points
+            </div>
+            <div id="ending-message" class="ending-message"></div>
+            <div id="impact-summary" class="impact-summary"></div>
+            <div class="ending-buttons">
+                <button id="play-again-btn" class="btn">Play Again</button>
+                <button id="share-result-btn" class="btn">Share Results</button>
+            </div>
+        </div>
+
+        <div id="hint-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Environmental Hint</h3>
+                <p id="hint-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="eco_adventure.js"></script>
+</body>
+</html>
