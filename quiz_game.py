@@ -95,5 +95,7 @@ if __name__ == '__main__':
     # Set up quiz routes
     setup_quiz_routes(app)
     
-    # Run the app
-    app.run(debug=True, port=5001)
+    # Replace line 98-99 with:
+    # Run the app with Render compatibility
+    port = int(os.environ.get('PORT', 5001))
+    app.run(host='0.0.0.0', port=port, debug=False)
